@@ -1,59 +1,40 @@
+
 let cart = [];
 
-function addToCart(productId, name, price) {
-  const existing = cart.find(item => item.id === productId);
-  if (existing) {
-    existing.quantity += 1;
-  } else {
-    cart.push({ id: productId, name, price, quantity: 1 });
-  }
-  updateCart();
-}
-
-function removeFromCart(productId) {
-  cart = cart.filter(item => item.id !== productId);
-  updateCart();
+function addToCart(id, name, price) {
+    const index = cart.findIndex(item => item.id === id);
+    if (index !== -1) {
+        cart[index].quantity++;
+    } else {
+        cart.push({ id, name, price, quantity: 1 });
+    }
+    updateCart();
 }
 
 function updateCart() {
-  const cartTable = document.getElementById("cart-table");
-  const cartTotal = document.getElementById("cart-total");
-  cartTable.innerHTML = `
-    <tr>
-      <th>نام کالا</th>
-      <th>تعداد</th>
-      <th>قیمت</th>
-      <th>حذف</th>
-    </tr>
-  `;
-  let total = 0;
-
-  cart.forEach(item => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-      <td>${item.name}</td>
-      <td>${item.quantity}</td>
-      <td>${item.price * item.quantity} تومان</td>
-      <td><button onclick="removeFromCart(${item.id})">حذف</button></td>
-    `;
-    cartTable.appendChild(row);
-    total += item.price * item.quantity;
-  });
-
-  cartTotal.innerText = `مبلغ کل: ${total} تومان`;
+    const table = document.getElementById("cart-table");
+    table.innerHTML = "";
+    let total = 0;
+    cart.forEach(item => {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td>${item.name}</td><td>${item.quantity}</td><td>${item.price * item.quantity} تومان</td>`;
+        table.appendChild(row);
+        total += item.price * item.quantity;
+    });
+    document.getElementById("total-price").textContent = total;
+    document.getElementById("cart-modal").style.display = "block";
 }
 
-function openCartModal() {
-  document.getElementById("cart-modal").style.display = "flex";
+function checkout() {
+    alert("خرید با موفقیت انجام شد!");
+    cart = [];
+    updateCart();
 }
 
-function closeCartModal() {
-  document.getElementById("cart-modal").style.display = "none";
+function closeCart() {
+    document.getElementById("cart-modal").style.display = "none";
 }
 
-window.addEventListener("click", function (event) {
-  const modal = document.getElementById("cart-modal");
-  if (event.target === modal) {
-    closeCartModal();
-  }
+document.getElementById("cart-button").addEventListener("click", () => {
+    updateCart();
 });
