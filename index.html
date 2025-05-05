@@ -1,74 +1,38 @@
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Amir Shop | فروشگاه آنلاین</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="icon" href="images/logo.png" type="image/png" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amir Shop - پیش‌نمایش</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <div class="container">
-      <div class="logo">
-        <img src="images/logo.png" alt="Amir Shop Logo" />
-        <h1>Amir Shop</h1>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="#">خانه</a></li>
-          <li><a href="#">محصولات</a></li>
-          <li><a href="#">دسته‌بندی‌ها</a></li>
-          <li><a href="#">پشتیبانی</a></li>
-          <li><button id="cart-button">سبد خرید</button></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <header>
+        <h1>فروشگاه امیر</h1>
+        <button id="cart-button">سبد خرید</button>
+    </header>
+    <main id="product-list">
+        <!-- محصولات نمونه -->
+        <div class="product">
+            <h2>گوشی هوشمند</h2>
+            <p>قیمت: ۱۵٬۰۰۰٬۰۰۰ تومان</p>
+            <button onclick="addToCart(1, 'گوشی هوشمند', 15000000)">افزودن به سبد</button>
+        </div>
+        <div class="product">
+            <h2>هدفون بلوتوثی</h2>
+            <p>قیمت: ۲٬۰۰۰٬۰۰۰ تومان</p>
+            <button onclick="addToCart(2, 'هدفون بلوتوثی', 2000000)">افزودن به سبد</button>
+        </div>
+    </main>
 
-  <main>
-    <section class="hero">
-      <h2>به فروشگاه بزرگ امیر خوش آمدید</h2>
-      <p>جدیدترین محصولات دیجیتال با بهترین قیمت</p>
+    <section id="cart-modal" style="display:none;">
+        <table id="cart-table"></table>
+        <p>قیمت کل: <span id="total-price">۰</span> تومان</p>
+        <button onclick="checkout()">پرداخت</button>
+        <button onclick="closeCart()">بستن</button>
     </section>
 
-    <section class="categories">
-      <h3>دسته‌بندی‌ها</h3>
-      <div class="category-list">
-        <div class="category">موبایل</div>
-        <div class="category">لپ‌تاپ</div>
-        <div class="category">هدفون</div>
-        <div class="category">ساعت هوشمند</div>
-      </div>
-    </section>
-
-    <section class="products">
-      <h3>محصولات ویژه</h3>
-      <div class="product-grid">
-        <!-- محصولات از طریق جاوااسکریپت بارگذاری می‌شوند -->
-      </div>
-    </section>
-  </main>
-
-  <div id="cart-modal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeCart()">&times;</span>
-      <h2>سبد خرید</h2>
-      <table id="cart-table"></table>
-      <p>جمع کل: <span id="total-price">۰</span> تومان</p>
-      <label>کد تخفیف:
-        <input type="text" id="discount-code" />
-        <button onclick="applyDiscount()">اعمال</button>
-      </label>
-      <p>جمع نهایی: <span id="grand-total">۰</span> تومان</p>
-      <button onclick="checkout()">پرداخت</button>
-    </div>
-  </div>
-
-  <footer>
-    <p>کلیه حقوق این وب‌سایت متعلق به Amir Shop می‌باشد &copy; 2025</p>
-  </footer>
-
-  <script src="js/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
